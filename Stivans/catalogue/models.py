@@ -7,7 +7,7 @@ from user.models import CustomUser
 
 class Item(models.Model):
     rating = models.DecimalField(validators=[MinValueValidator(1), MaxValueValidator(5)], max_digits=2, decimal_places=1)
-    image = models.ImageField(upload_to='media/products/')
+    image = models.ImageField(upload_to='products', default='default.png')
     name = models.CharField(max_length=256)
     description =models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=10)
