@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import UserRegisterForm
 from django.contrib.auth.views import LoginView
+
 # Create your views here.
 
 def Register(request):
