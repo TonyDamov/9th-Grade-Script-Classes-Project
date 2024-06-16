@@ -1,16 +1,17 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from . .user.models import CustomUser
+from user.models import CustomUser
 
 
 # Create your models here.
 
 class Item(models.Model):
     rating = models.DecimalField(validators=[MinValueValidator(1), MaxValueValidator(5)], max_digits=2, decimal_places=1)
-    image = models.ImageField(upload_to='media/')
+    image = models.ImageField(upload_to='media/products/')
     name = models.CharField(max_length=256)
     description =models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=10)
+
 
 
 
