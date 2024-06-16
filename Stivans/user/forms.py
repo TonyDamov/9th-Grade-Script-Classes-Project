@@ -18,3 +18,11 @@ class UserRegisterForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
         fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'street_name', 'street_number', 'province', 'municipality', 'city', 'country']
+
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+
+        model = CustomUser
+        fields = ['first_name', 'last_name', 'street_name', 'street_number', 'province', 'municipality', 'city', 'country']
