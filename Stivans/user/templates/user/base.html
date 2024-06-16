@@ -19,7 +19,7 @@
     {% endif %}
 </head>
 <body>
-    <header class="site-header" style="padding-bottom: 3.5rem;margin: 0px;">
+    <header class="site-header" style="padding-bottom: 3.5rem; margin: 1rem">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: rgba(0, 0, 0, 1);">
         <div class="container">
           <a class="navbar-brand mr-4" style="color: rgb(255, 255, 255);" href="{% url 'home' %}">Stivans</a>
@@ -50,9 +50,9 @@
         </div>
       </nav>
     </header>
-    <main role="main" >
-      <div>
-        <div  >
+    <main role="main" class="container">
+      <div class="row">
+        <div  class="col-md-8">
           {% if messages %}
             {% for message in messages %}
               <div class="alert alert-{{ message.tags }}">

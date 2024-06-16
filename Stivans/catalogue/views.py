@@ -6,5 +6,8 @@ from django.http import HttpResponse
 def Home(request):
     return render(request, 'catalogue/home.html')
 
+def Products(request):
+    return render(request, 'catalogue/products.html')
+
 def About(request):
     return HttpResponse('You are in about page')
