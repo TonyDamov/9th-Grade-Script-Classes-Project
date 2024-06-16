@@ -10,4 +10,4 @@ def Products(request):
     return render(request, 'catalogue/products.html')
 
 def About(request):
-    return HttpResponse('You are in about page')
+    return render(request, 'catalogue/about.html')
