@@ -60,7 +60,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'user/templates/user'
+            BASE_DIR / 'user/templates/',
+            BASE_DIR / 'catalogue/templates/'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -140,4 +141,4 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'home'

@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import UserRegisterForm
-from .models import CustomUser
+from django.contrib.auth.views import LoginView
 # Create your views here.
 
 def Register(request):
-#    if request.user.is_authenticated():
-#        return redirect()
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -21,5 +21,9 @@ def Register(request):
 
     return render(request, 'user/register.html', {'form': form})
 
-#def Login(request):
-    #return HttpResponse('      ')
+
+class CustomLoginView(LoginView):
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('home') 
+        return super().dispatch(request, *args, **kwargs)
