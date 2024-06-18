@@ -1,0 +1,23 @@
+{% extends "catalogue/base.html" %}
+{% block content %}
+
+<div class="cart-container">
+    {% for item in all %}
+        <div class="cart-item">
+        <span class="item-name">{{item.item}}</span>
+        <form action="/add" method="POST" style="float: right;">
+            <input type="hidden" name="item_id" value="1">
+            <button type="submit">+</button>
+        </form>
+        <form action="/remove" method="DELETE" style="float: right;">
+            <input type="hidden" name="item_id" value="1">
+            <button type="submit">-</button>
+        </form>
+        <span class="item-count">{{item.count}}</span>
+        <div class="clear-fix"></div>
+        </div>
+    {% endfor %}
+    <!-- Add more items here -->
+  </div>
+
+{% endblock content %}
