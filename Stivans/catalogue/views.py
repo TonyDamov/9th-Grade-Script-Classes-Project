@@ -22,7 +22,7 @@ def Items(request):
 
 
 
-def ItemsAddToCart(request, pk):
+def ItemsDetail(request, pk):
     if request.method == 'POST':
         if request.user.is_authenticated:
             user = request.user
@@ -32,18 +32,34 @@ def ItemsAddToCart(request, pk):
             return redirect('products')
         else:
             return redirect('login')
+    elif request.method == 'DELETE':
+        if user.is_authenticated:
+            user = request.user
+            user_cart = Item.objects.filter(user)
+            item = Item.objects.get(id=pk)
+            item_to_del = user_cart.filter(item).first()
+            item_to_del.delete()
+            return redirect('cart')
+        else:
+            return redirect('login')
     
+    elif request.method == 'GET':
+        item = Item.objects.get(id=pk)
+
+        return render(request, 'catalogue/item_detail.html', {'title':'Product item.id - Stivans', 'item':item})
+    else:
+        return redirect('products')
 
         
 
 
-def ItemsDetail(request, pk):
-
-    item = Item.objects.get(id=pk)
-
-    return render(request, 'catalogue/item_detail.html', {'title':'Product item.id - Stivans', 'item':item})
-
-
 
 def Carts(request):
+    user = request.user
+    if user.is_authenticated:
+        user_cart = Item.objects.all()
+
+
+    else:
+        return redirect('login')
     render(request, 'catalogue/cart.html', context={'title':'Cart - Stivans'})

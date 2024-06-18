@@ -107,7 +107,7 @@
         </div>
     </div>
       <!-- Add to Cart button -->
-      <form method="post" action="{% url 'add-to-cart' pk=item.id %}">
+      <form method="post" action="{% url 'products-detail' pk=item.id %}">
           {% csrf_token %}
           <button type="submit" class="product-button">Add to Cart</button>
       </form>
