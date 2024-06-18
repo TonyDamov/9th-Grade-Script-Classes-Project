@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
+from .models import CustomUser
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import UserRegisterForm, UserUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, UserLoginForm
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import check_password
+
 
 # Create your views here.
 
@@ -20,15 +24,7 @@ def Register(request):
     else:
         form = UserRegisterForm()
 
-    return render(request, 'user/register.html', {'form': form})
-
-
-class CustomLoginView(LoginView):
-    def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return redirect('home') 
-        return super().dispatch(request, *args, **kwargs)
-
+    return render(request, 'user/register.html', {'form': form, 'title':'Register - Stivans'})
 
 def EditUser(request):
     if request.method == 'POST':
@@ -40,4 +36,4 @@ def EditUser(request):
     else:
         form = UserUpdateForm(instance=request.user)
 
-    return render(request, 'user/profile.html', {'form' : form})
+    return render(request, 'user/profile.html', {'form' : form, 'title':'User profile - Stivans'})

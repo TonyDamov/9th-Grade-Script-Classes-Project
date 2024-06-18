@@ -12,11 +12,9 @@
 
     <!--<link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}"> -->
 
-    {% if title %}
-        <title>Django Blog - {{ title }}</title>
-    {% else %}
-        <title>Django Blog</title>
-    {% endif %}
+    
+    <title>{{ title }}</title>
+    
 </head>
 <body>
     <header class="site-header" style="padding-bottom: 3.5rem; margin: 1rem">

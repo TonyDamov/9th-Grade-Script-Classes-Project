@@ -3,17 +3,25 @@ from .models import CustomUser
 from django.contrib.auth.forms import UserCreationForm
 
 
+class UserLoginForm(forms.ModelForm):
+    username = forms.CharField(max_length=150)
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'password']
+
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
-    first_name = forms.CharField(max_length=150, required=False)
-    last_name = forms.CharField(max_length=150, required=False)
-    street_name = forms.CharField(max_length=128, required=False)
-    street_number = forms.IntegerField(required=False)
-    province = forms.CharField(max_length=256, required=False)
-    municipality = forms.CharField(max_length=256, required=False)
-    city = forms.CharField(max_length=256, required=False)
-    country = forms.CharField(max_length=64, required=False)
+    first_name = forms.CharField(max_length=150)
+    last_name = forms.CharField(max_length=150)
+    street_name = forms.CharField(max_length=128)
+    street_number = forms.IntegerField()
+    province = forms.CharField(max_length=256)
+    municipality = forms.CharField(max_length=256)
+    city = forms.CharField(max_length=256)
+    country = forms.CharField(max_length=64)
 
     class Meta(UserCreationForm):
         model = CustomUser
