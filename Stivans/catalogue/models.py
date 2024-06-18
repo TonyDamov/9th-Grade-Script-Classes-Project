@@ -14,7 +14,7 @@ class Item(models.Model):
 
 
 
-
+    
 class Cart(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)

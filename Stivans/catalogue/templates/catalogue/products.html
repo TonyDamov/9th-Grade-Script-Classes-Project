@@ -1,0 +1,129 @@
+{% extends "catalogue/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .product-list {
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        margin-left: 30px;
+        margin-right: 30px;
+        justify-content: center;
+        gap: 20px; 
+    }
+    .product-card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 16px;
+        text-align: center;
+        width: 250px;
+        height: 400px; /* Adjusted height to accommodate additional space */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Vertically center items */
+    }
+    .product-image {
+        width: 100%;
+        height: auto;
+        margin-bottom: 16px;
+    }
+    .product-name {
+        font-size: 1.2em;
+        margin: 0.5em 0;
+    }
+    .product-price {
+        font-size: 1.1em;
+        color: #333;
+    }
+    .product-rating {
+        margin-top: auto; /* Push to the bottom */
+        text-align: center;
+    }
+    .product-rating div {
+        display: inline-block;
+    }
+    .product-button, .details-button {
+        display: inline-block;
+        padding: 8px 16px;
+        margin-top: 12px;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+    .product-button:hover, .details-button:hover {
+        background-color: #333;
+        text-decoration: none;
+        color:#fff
+    }
+    .details-button {
+        margin-top: 8px;
+    }
+</style>
+
+<section>
+    <ul class="product-list">
+        {% for item in items %}
+        <li class="product-card">
+            <img class="product-image" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="...">
+            <div class="product-name">{{item.name}}</div>
+            <div class="product-price">${{item.price}}</div>
+            <div class="product-rating">
+                {% if item.rating >= 1 %}
+                    <div class="bi-star-fill"></div> <!-- full star -->
+                {% elif item.rating >= 0.5 %}
+                    <div class="bi-star-half"></div> <!-- half star -->
+                {% else %}
+                    <div class="bi-star"></div> <!-- empty star -->
+                {% endif %}
+
+                {% if item.rating >= 2 %}
+                    <div class="bi-star-fill"></div> <!-- full star -->
+                {% elif item.rating >= 1.5 %}
+                    <div class="bi-star-half"></div> <!-- half star -->
+                {% else %}
+                    <div class="bi-star"></div> <!-- empty star -->
+                {% endif %}
+
+                {% if item.rating >= 3 %}
+                    <div class="bi-star-fill"></div> <!-- full star -->
+                {% elif item.rating >= 2.5 %}
+                    <div class="bi-star-half"></div> <!-- half star -->
+                {% else %}
+                    <div class="bi-star"></div> <!-- empty star -->
+                {% endif %}
+
+                {% if item.rating >= 4 %}
+                    <div class="bi-star-fill"></div> <!-- full star -->
+                {% elif item.rating >= 3.5 %}
+                    <div class="bi-star-half"></div> <!-- half star -->
+                {% else %}
+                    <div class="bi-star"></div> <!-- empty star -->
+                {% endif %}
+
+                {% if item.rating >= 5 %}
+                    <div class="bi-star-fill"></div> <!-- full star -->
+                {% elif item.rating >= 4.5 %}
+                    <div class="bi-star-half"></div> <!-- half star -->
+                {% else %}
+                    <div class="bi-star"></div> <!-- empty star -->
+                {% endif %}
+            </div>
+            <form method="post" action="{% url 'add-to-cart' pk=item.id %}">
+                {% csrf_token %}
+                <button type="submit" class="product-button">Add to cart</button>
+            </form>
+            <a href="{% url 'products-detail' pk=item.id %}" class="details-button">Details</a>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% endblock content %}

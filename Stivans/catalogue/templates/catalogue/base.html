@@ -1,8 +1,9 @@
 {% load static %}
+
+
 <!DOCTYPE html>
 <html>
 <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,12 +12,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!--<link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}"> -->
-
-    {% if title %}
-        <title>Django Blog - {{ title }}</title>
-    {% else %}
-        <title>Django Blog</title>
-    {% endif %}
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    
+    <title>{{ title }}</title>
+    
 </head>
 <body>
     <header class="site-header" style="padding-bottom: 3.5rem;margin: 0px;">
@@ -61,6 +65,10 @@
             {% endfor %}
           {% endif %}
           {% block content %}{% endblock %}
+
+          <footer class="py-5"style="background-color:black;">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; StivansEOOD</p></div>
+        </footer>
         </div>
       </div>
     </main>
