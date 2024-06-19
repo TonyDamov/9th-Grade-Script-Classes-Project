@@ -6,5 +6,6 @@ urlpatterns = [
     path('products/', catalogue_views.Items, name='products'),
     path('products/<int:pk>/', catalogue_views.ItemsDetail, name='products-detail'),
     path('about/', catalogue_views.About, name='about'),
-    path('cart/', catalogue_views.Cart, name='cart'),
+    path('cart/', catalogue_views.Carts, name='cart'),
+    path('cart/<int:pk>/', catalogue_views.CartsAddOrDel, name='cart-functions'),
 ]

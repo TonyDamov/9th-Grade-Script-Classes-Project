@@ -1,23 +1,33 @@
 {% extends "catalogue/base.html" %}
 {% block content %}
+<style>
+    .button {
+        border-radius: 5px;
+        color: black;
+        background-color: white;
+        margin: 3px;
 
-<div class="cart-container">
+    }
+</style>
+
+
+<div class="cart-container" style="min-height: 80vh; margin: 10px 100px;">
     {% for item in all %}
-        <div class="cart-item">
+        <div class="cart-item" style="margin:20px; border: 5px 5px; border-color: black; border-style: solid; padding: 10px;">
         <span class="item-name">{{item.item}}</span>
-        <form action="/add" method="POST" style="float: right;">
-            <input type="hidden" name="item_id" value="1">
-            <button type="submit">+</button>
+        <form action="{% url 'cart-functions' pk=item.id %}" method="POST" style="float:right;">
+            {% csrf_token %}
+            
+            <button type="submit" class="button">+1</button>
         </form>
-        <form action="/remove" method="DELETE" style="float: right;">
-            <input type="hidden" name="item_id" value="1">
-            <button type="submit">-</button>
+        <form id="deleteForm" style="float: right;">
+            {% csrf_token %}
+            
+            <button type="submit" class="button">-1</button>
         </form>
         <span class="item-count">{{item.count}}</span>
         <div class="clear-fix"></div>
         </div>
     {% endfor %}
-    <!-- Add more items here -->
   </div>
-
 {% endblock content %}

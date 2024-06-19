@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
 from .models import Item, Cart
 
 # Create your views here.
@@ -30,18 +29,6 @@ def ItemsDetail(request, pk):
             item = Item.objects.get(id=pk)
             Cart.objects.create(user=user,item=item)
             return redirect('products')
-        else:
-            return redirect('login')
-    elif request.method == 'DELETE':
-        if user.is_authenticated:
-            user = request.user
-            user_cart = Item.objects.filter(user)
-            item = Item.objects.get(id=pk)
-            item_to_del = user_cart.filter(item).first()
-            item_to_del.delete()
-            return redirect('cart')
-        else:
-            return redirect('login')
     
     elif request.method == 'GET':
         item = Item.objects.get(id=pk)
@@ -52,14 +39,47 @@ def ItemsDetail(request, pk):
 
         
 
+def CartsAddOrDel(request, pk):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            user = request.user
+            print(user)
+            item = Item.objects.get(id=pk)
+            Cart.objects.create(user=user,item=item)
+            return redirect('cart')
+        else:
+            return redirect('login')
+    elif request.method == 'DELETE':
+        if user.is_authenticated:
+            user = request.user
+            item_to_del = Cart.objects.filter(user=user, item=pk).first()
+            item_to_del.delete()
+            return redirect('cart')
+        else:
+            return redirect('login')
+    else:
+        return redirect('cart')
 
 
 def Carts(request):
     user = request.user
     if user.is_authenticated:
-        user_cart = Item.objects.all()
+        user_cart = Cart.objects.filter(user=user)
 
+        all = []
+        items = []
+        counts = []
+        ids = []
+        for cart in user_cart:
+            if cart.item.name not in items:
+                items.append(cart.item.name)
+                counts.append(1)
+                item_id = cart.item.id
+                ids.append(item_id)
+            else:
+                counts[items.index(cart.item.name)] += 1
 
-    else:
-        return redirect('login')
-    render(request, 'catalogue/cart.html', context={'title':'Cart - Stivans'})
+        for j in range(len(items)):
+            all.append({'item': items[j], 'count': counts[j], 'id' : ids[j]})
+
+        return render(request, 'catalogue/cart.html', context={'title':'Cart - Stivans', 'all':all})
